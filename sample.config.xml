@@ -1,0 +1,29 @@
+<config>
+    
+    <db_server>
+        <host>0.0.0.0</host>
+        <port>8001</port>
+    </db_server>
+
+    <server_type>test</server_type>
+    
+    <certificates>
+        <private_key>/home/privkey.pem</private_key>
+        <certificate>/home/cert.pem</certificate>
+        <certificate_chain>/home/fullchain.pem</certificate_chain>
+    </certificates>
+
+    <mail_config>
+        <email_from>your@emailr.com</email_from>
+        <email_to>default.to@mail.com</email_to>
+        <email_username>your@emailr.com</email_username>
+        <email_password>your.emailr.password</email_password>
+    </mail_config>
+
+    <cron>
+        <venv_path>/your/virtual/env/path/python</venv_path>
+        <scripts_dir>/your/cron_scripts/folder/path</scripts_dir>
+        <cron_user>your-cron-username</cron_user>
+    </cron>
+
+</config>
