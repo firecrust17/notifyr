@@ -20,6 +20,11 @@ export class CronService {
   	return this.http.post<any>(this.activate_cron_url, payload);
   }
 
+	private update_cron_url = `${this.service_url}/update_cron`;
+  update_cron(payload) {
+  	return this.http.post<any>(this.update_cron_url, payload);
+  }
+
 	private deactivate_cron_url = `${this.service_url}/deactivate_cron`;
   deactivate_cron(payload) {
   	return this.http.post<any>(this.deactivate_cron_url, payload);

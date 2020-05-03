@@ -8,7 +8,7 @@
 					<th>Script</th>
 					<th>Status</th>
 				</tr>
-				<tr *ngFor="let rec of scripts_list; let i=index" (click)="selected_index = i"  [ngClass]="selected_index == i? 'bg-info':''">
+				<tr *ngFor="let rec of scripts_list; let i=index" (click)="show_rules(i)"  [ngClass]="selected_index == i? 'bg-info':''">
 					<td>{{i+1}}</td>
 					<td>
 						{{rec.script}}
@@ -26,27 +26,30 @@
 		</div>
 		<div class="col-6" *ngIf="selected_index != -1">
 
-			<table class="table table-hover table-sm table-dark" *ngIf="scripts_list.length">
-				<tr>
+			<table class="table table-hover table-sm" *ngIf="scripts_list.length">
+				<tr class="bg-dark text-light">
 					<th>Name</th>
 					<th>Rule Type</th>
 					<th>Value</th>
 				</tr>
-				<tr *ngFor="let rec of types; let i=index">
+				<tr *ngFor="let rec of types; let i=index" class="bg-light">
 					<td>
 						{{rec.name}}
 					</td>
 					<td>
-						Radios - On / Every / None
+						<input type="radio" name="{{rec.name}}_type" [(ngModel)]="rules[rec.value]['type']" value="on"> On
+						<input type="radio" name="{{rec.name}}_type" [(ngModel)]="rules[rec.value]['type']" value="every"> Every
+						<input type="radio" name="{{rec.name}}_type" [(ngModel)]="rules[rec.value]['type']" value="null"> None
 					</td>
 					<td>
-						Input
+						<input class="form-control form-control-sm" type="text" [(ngModel)]="rules[rec.value]['value']" name="{{rec.name}}_value">
 					</td>
 				</tr>
 			</table>
 
-			<button *ngIf="!scripts_list[selected_index]['rules']" (click)="validate_rules(i)" class="btn btn-success">Activate</button>
-			<button *ngIf="scripts_list[selected_index]['rules']" (click)="deactivate_cron(i)" class="btn btn-danger">Deactivate</button>
+			<button *ngIf="!scripts_list[selected_index]['rules']" (click)="activate()" class="btn btn-success">Activate</button>
+			<button *ngIf="scripts_list[selected_index]['rules']" (click)="deactivate_cron()" class="btn btn-danger">Deactivate</button>
+			<button *ngIf="scripts_list[selected_index]['rules']" (click)="update()" class="btn btn-warning ml-2">Update</button>
 
 		</div>
 	</div>

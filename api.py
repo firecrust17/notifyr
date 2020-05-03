@@ -56,6 +56,16 @@ class DeactivateCron(restful.Resource):
 		else:
 			return {'success': res, 'message': 'Something went wrong'}
 
+class UpdateCron(restful.Resource):
+	def post(self):
+		data = request.get_json()
+
+		obj = CronManager()
+		res = obj.deactivate_cron(data['script'])
+		res = obj.activate_cron(data['script'], data['rules'])
+	    
+		return {'success': res, 'message': 'Cron Updated Successfully', 'data': res}
+
 ##########################################################################################
 # APIs
 app = Flask(__name__)
@@ -67,3 +77,4 @@ api.add_resource(SendEmail, '/send_email')
 api.add_resource(GetAllCrons, '/get_all_crons')
 api.add_resource(ActivateCron, '/activate_cron')
 api.add_resource(DeactivateCron, '/deactivate_cron')
+api.add_resource(UpdateCron, '/update_cron')
